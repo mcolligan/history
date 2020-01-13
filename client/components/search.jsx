@@ -4,7 +4,8 @@ class Search extends React.Component {
   constructor() {
     super();
     this.state = {
-      term: ''
+      term: '',
+      results: []
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,7 +17,12 @@ class Search extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('---', this.state.term);
+    fetch(`http://localhost:3000/events?q=${this.state.term}`)
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({results: [...data]});
+      console.log(this.state)
+    })
   }
 
   render() {
