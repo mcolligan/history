@@ -1,5 +1,7 @@
 import React from 'react';
 
+import HistoryList from './historyList.jsx';
+
 class Search extends React.Component {
   constructor() {
     super();
@@ -12,17 +14,16 @@ class Search extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({term: e.target.value});
+    this.setState({ term: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     fetch(`http://localhost:3000/events?q=${this.state.term}`)
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({results: [...data]});
-      console.log(this.state)
-    })
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({ results: [...data] });
+      })
   }
 
   render() {
@@ -31,11 +32,17 @@ class Search extends React.Component {
         <form>
           <div>
             <label>Search:
-              <input type="text" id="term" placeholder="Search some History" onChange={this.handleChange}/>
+              <input className="form-control" type="text" id="term" placeholder="Search some History" onChange={this.handleChange} />
             </label>
-            <input type="submit" value="submit" onClick={this.handleSubmit}/>
+            <input className="btn-primary" type="submit" value="submit" onClick={this.handleSubmit} />
           </div>
         </form>
+
+        <div className="container">
+          {this.state.results.map((el, i) =>
+            <HistoryList key={i} info={el} />
+          )}
+        </div>
       </div>
     )
   }
