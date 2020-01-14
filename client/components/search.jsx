@@ -15,6 +15,25 @@ class Search extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getHistory = this.getHistory.bind(this);
+    this.handlePage = this.handlePage.bind(this);
+  }
+
+  getHistory(num) {
+    let n = num ? num + 1 : 1;
+    axios.get(`http://localhost:3000/events?q=${this.state.term}&_page=${n}&_limit=10`)
+    .then((res) => {
+      let c = Math.ceil(Number(res.headers['x-total-count'] / 10));
+      this.setState({
+        results: [...res.data],
+        pageCount: c
+      })
+    })
+    .catch(err => console.log('Nope:', err))
+  }
+
+  handlePage(e) {
+    this.getHistory(e.selected);
   }
 
   handleChange(e) {
@@ -23,14 +42,7 @@ class Search extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.get(`http://localhost:3000/events?q=${this.state.term}&_page=${this.state.pageToGet}&_limit=10`)
-    .then((res) => {
-      let c = Math.ceil(Number(res.headers['x-total-count'] / 10));
-      this.setState({
-        results: [...res.data],
-        pageCount: c
-      })
-    })
+    this.getHistory();
   }
 
   render() {
@@ -55,11 +67,15 @@ class Search extends React.Component {
           previousLabel={'<- Previous'}
           nextLabel={'Next ->'}
           breakLabel={' <...> '}
+          pageCount={this.state.pageCount}
+          onPageChange={this.handlePage}
           breakClassName={'break-me'}
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
           previousLinkClassName={"btn btn-primary"}
-          activeClassName={'active'} />
+          nextLinkClassName={"btn btn-primary"}
+          disabledClassName={"disbaled"}
+          activeClassName={"nav-link active"} />
           </div>
       </div>
     )

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const HistoryList = (props) => {
-  console.log('--', props)
   return (
     <div>
       <div className="card">
