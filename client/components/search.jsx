@@ -76,7 +76,7 @@ class Search extends React.Component {
           nextLinkClassName={"btn btn-outline-secondary"}
           disabledClassName={"disbaled"}
           marginPagesDisplayed={2}
-          activeClassName={"btn btn-outline-info"} />
+          activeClassName={"active"} />
           </div>
       </div>
     )

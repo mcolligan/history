@@ -1,6 +1,6 @@
 # Factual History
 
-### Quick and easy history finder.
+### A quick and easy history "fact" finder.
 
 ### Getting Started:
 
@@ -15,4 +15,6 @@ $ npm start
 ```
 -- Server will start on port 3000.
 
-Navigate to http://localhost:3000
+-- Navigate to http://localhost:3000 and begin searching.
+
+###### Layout
