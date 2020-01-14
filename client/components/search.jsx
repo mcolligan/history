@@ -53,7 +53,7 @@ class Search extends React.Component {
             <label>Search:
               <input className="form-control" type="text" id="term" placeholder="Search some History" onChange={this.handleChange} />
             </label>
-            <input className="btn-primary" type="submit" value="submit" onClick={this.handleSubmit} />
+            <input className="btn-outline-secondary" type="submit" value="submit" onClick={this.handleSubmit} />
           </div>
         </form>
 
@@ -72,10 +72,11 @@ class Search extends React.Component {
           breakClassName={'break-me'}
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
-          previousLinkClassName={"btn btn-primary"}
-          nextLinkClassName={"btn btn-primary"}
+          previousLinkClassName={"btn btn-outline-secondary"}
+          nextLinkClassName={"btn btn-outline-secondary"}
           disabledClassName={"disbaled"}
-          activeClassName={"nav-link active"} />
+          marginPagesDisplayed={2}
+          activeClassName={"btn btn-outline-info"} />
           </div>
       </div>
     )
